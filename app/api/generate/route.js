@@ -1,17 +1,33 @@
 import { NextResponse } from 'next/server'
-import { createOpenAI } from '@ai-sdk/openai';
+import { Groq} from 'groq-js';
+import OpenAI from "openai";
 
-const groq = createOpenAI({
-  baseURL: 'https://api.groq.com/openai/v1',
-  apiKey: process.env.GROQ_API_KEY, // Read the API key from environment variables
+const openai = new OpenAI({
+  apiKey: process.env.GROQ_API_KEY,
+  baseURL: 'https://api.groq.com/openai/v1'
+  // Read the API key from environment variables
 });
-//API KEY: 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
+
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
 
 const systemPrompt = `
-You are a flashcard creator, you take in text and create multiple flashcards from it. Make sure to create exactly 10 flashcards.
-Both front and back should be one sentence long.
+You are a flashcard creator. Your task is to generate concise and effective flashcards based on the given topic or content.
+Follow these guidelines.
+
+1. Create clear and concise questions for the front of the flashcard.
+2. Provide accurate and informative answers for the back of the flashcard.
+3. Ensure that each of the card focuses on a single concept or piece of information.
+4. Use simple language to make the flashcards accessible to a wide range of learners.
+5. Include a variety of question types, such as defintions, examples, comparisons, and applications.
+6. Avoid overly complex, or ambiguous phrasing in both questions and answers.
+7. When appropriate, use mnemonics or memory aids to help reinforce the information.
+8. Tailor the difficulty level of the flashcards to the user's speicifed preferences.
+9. If given a body of text, extract the most important and relevant information for the flashcards.
+10. Aim to create a balanced set of flashcards that covers the topic comprehensively,
+11. Only generate 10 flashcards.
+
+Remember the goal is to facilitate effective learning and retention of information through these flashcards.
 You should return in the following JSON format:
 {
   "flashcards":[
@@ -32,7 +48,7 @@ export async function POST(req) {
           { role: 'system', content: systemPrompt },
           { role: 'user', content: data },
         ],
-        model: groq('llama-3.1-8b-instant'),
+        model: 'llama-3.1-8b-instant',
         response_format: { type: 'json_object' },
       })
     

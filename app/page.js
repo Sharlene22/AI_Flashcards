@@ -3,9 +3,40 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, Button, Box, Grid, Container } from '@mui/material';
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+import getStripe from '../utils/get-stripe';
 // Adjust the path as needed
 
 export default function Home() {
+
+  const handleSubmit = async ()=> { 
+    const checkoutSession = await fetch('/api/checkout_session', {
+      method: 'POST',
+      headers: {
+        origin: 'http://localhost:3000',
+      },
+    })
+
+    const checkoutSessionJson = await checkoutSession.json()
+
+    if (checkoutSession.statusCode === 500) {
+      console.error(checkoutSession.message)
+      return
+    }
+     
+    
+
+    const stripe = await getStripe()
+    const {error} = await stripe.redirectToCheckout({
+      sessionId: checkoutSessionJson.id,
+
+    })
+
+    if (error){
+      console.warn(error.message)
+    }
+  }
+
+
   return (
     <Container>
       <AppBar position="static">
@@ -81,7 +112,7 @@ export default function Home() {
                 {' '}
                 Access to core features, perfect for individual learners.
               </Typography>
-              <Button variant = "container" color = "primary">Choose Basic</Button>
+              <Button variant = "contained" color = "primary" sx={{mt:2}} onClick={handleSubmit}>Choose Basic</Button>
             </Box>
           </Grid>
           <Grid item xs={12} md={4}>
@@ -98,7 +129,7 @@ export default function Home() {
               <Typography>
                 Includes advanced features for power users and educators.
               </Typography>
-              <Button variant = "container" color = "primary">Choose Pro</Button>
+              <Button variant = "contained" color = "primary" sx={{mt:2}} onClick={handleSubmit}>Choose Pro</Button>
             </Box>
           </Grid>
         </Grid>

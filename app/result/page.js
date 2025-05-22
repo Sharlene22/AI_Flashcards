@@ -1,11 +1,13 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
-import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
+import { useSearchParams } from 'next/navigation' 
+import getStripe from '../../utils/get-stripe'
 import { Container, CircularProgress, Typography, Box } from '@mui/material'
 
 const ResultPage = () => {
+    const router = useRouter()
     const searchParams = useSearchParams()
     const session_id = searchParams.get('session_id')
     const [loading, setLoading] = useState(true)
@@ -20,7 +22,7 @@ const ResultPage = () => {
                 return
             }
             try {
-                const response = await fetch(/api/checkout_sessions?session_id=${session_id})
+                const response = await fetch('/api/checkout_sessions?session_id=${session_id}')
                 if (!response.ok) {
                     const errorData = await response.json()
                     setError(errorData.error || 'Failed to fetch session data.')

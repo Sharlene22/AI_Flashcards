@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import {
   Container,
   Grid,
@@ -13,9 +13,9 @@ import {
   CardActionArea,
   CardContent
 } from '@mui/material'
-import { useUser } from 'your-auth-hook-module' // Replace with actual module path
+//import { useUser } from 'your-auth-hook-module' // Replace with actual module path
 import { db } from '../firebase'
-import { doc, collection, getDoc, setDoc } from 'firebase/firestore'
+import { collection, doc, getDoc, setDoc } from 'firebase/firestore'
 import { useUser } from '@clerk/nextjs' 
 
 export default function Flashcard() {
