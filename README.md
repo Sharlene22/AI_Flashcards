@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+AI FLASHCARDS allows users to sign up, log in, and purchase a monthly Pro subscription using Stripe Checkout. It’s secured with Clerk for authentication and built using the latest Next.js app directory structure. An AI-powered flashcard generator helps users quickly convert any topic into a 10 structured set of flashcards—perfect for studying, quick reviews, or teaching! Users can save flashcards after signing in and review!
 
-## Getting Started
+💡 APPLICATIONS
+📚 Learning & Studying: Automatically generate flashcards from any topic to enhance retention.
 
-First, run the development server:
+🧠 AI-assisted Summarization: Leverages LLMs (LLaMA 3.1) to break down complex topics into bite-sized Q&A cards.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+✨ FEATURES
+🔐 Authentication via Clerk
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+💳 Stripe-powered subscription checkout
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+📦 Firebase for backend functions & storage
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+🌐 Deployed with Vercel
 
-## Learn More
+🧾 Dynamic pricing & real-time updates
 
-To learn more about Next.js, take a look at the following resources:
+✅ Success & cancel pages with session handling
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+🛠️ TECH STACK
+Next.js 14 (App Router)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Stripe (Subscription API, Checkout Session)
 
-## Deploy on Vercel
+Firebase (Functions, Firestore, Storage)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Clerk (Authentication & User Management)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Material UI (Frontend components)
+
+Vercel (Hosting & deployment)
+
